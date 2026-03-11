@@ -2,8 +2,13 @@ import express from "express";
 
 const app = express();
 
-app.get("/", (req, res) => {
-   res.send("Nginx is working");
+app.get("/", async (req, res) => {
+  let data;
+  fetch("https://dummyjson.com/products?limit=1000")
+    .then((res) => res.json())
+    .then((d) => {
+      return res.json(d);
+    });
 });
 
 app.listen(1009, () => {
